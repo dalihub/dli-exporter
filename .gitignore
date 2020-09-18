@@ -1,0 +1,8 @@
+build/windows/.intermediate/**
+build/windows/.artifacts/**
+**/.vs/
+**.orig
+**.rej
+**.patch
+**.bak
+**.cmake
