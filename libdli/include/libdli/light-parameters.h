@@ -17,16 +17,18 @@
  *
  */
 
- // EXTERNAL INCLUDES
-#include <stdint.h>
+// INTERNAL INCLUDES
+#include "libdli-api.h"
 
+// EXTERNAL INCLUDES
 #include "dali/public-api/math/matrix.h"
 #include "dali/public-api/math/vector3.h"
+#include <stdint.h>
 
 namespace dli
 {
 
-struct LightParameters
+struct LIBDLI_API LightParameters
 {
   // NOTE: the position is ignored unless shadow mapping is used.
   Dali::Matrix transform;

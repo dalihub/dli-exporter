@@ -16,6 +16,11 @@
 * limitations under the License.
 *
 */
+
+// INTERNAL INCLUDES
+#include "libdli-api.h"
+
+// EXTERNAL INCLUDES
 #include "dali/public-api/math/matrix.h"
 #include "dali/public-api/common/vector-wrapper.h"
 
@@ -25,7 +30,7 @@ namespace dli
 ///@brief A stack of matrices whereby each newly pushed matrix is stored
 /// after being multiplied by the previous one (if any).
 ///@note Current implementation reserves space for 16 matrices.
-class MatrixStack
+class LIBDLI_API MatrixStack
 {
 public:
   MatrixStack();
@@ -42,4 +47,3 @@ private:
 }
 
 #endif //LIBDLI_MATRIX_STACK_H_
-

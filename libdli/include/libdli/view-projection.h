@@ -17,6 +17,9 @@
 *
 */
 
+// INTERNAL INCLUDES
+#include "libdli-api.h"
+
 // EXTERNAL INCLUDES
 #include "dali/public-api/math/matrix.h"
 

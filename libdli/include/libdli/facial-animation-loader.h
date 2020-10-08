@@ -17,7 +17,8 @@
  *
  */
 
-// INTERNAL INCLUDES
+ // INTERNAL INCLUDES
+#include "libdli-api.h"
 #include "animation-definition.h"
 
 namespace dli
@@ -31,7 +32,8 @@ namespace dli
  *
  * @return An animation definition.
  */
-AnimationDefinition LoadFacialAnimation(const std::string& url);
+AnimationDefinition LIBDLI_API LoadFacialAnimation(const std::string& url);
+
 } // namespace dli
 
 #endif // LIBDLI_FACIAL_ANIMATION_LOADER_H

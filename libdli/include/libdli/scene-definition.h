@@ -17,21 +17,21 @@
 *
 */
 
-// EXTERNAL
-#include "dali/public-api/math/quaternion.h"
-#include "dali/public-api/math/matrix.h"
-#include "dali/public-api/math/vector4.h"
-#include "dali/public-api/actors/actor.h"
-#include <string>
-#include <memory>
-
-// INTERNAL
+// INTERNAL INCLUDES
 #include "lighting-mode.h"
 #include "customization.h"
 #include "text-details.h"
 #include "utils.h"
 #include "node-definition.h"
 #include "string-callback.h"
+
+// EXTERNAL INCLUDES
+#include "dali/public-api/math/quaternion.h"
+#include "dali/public-api/math/matrix.h"
+#include "dali/public-api/math/vector4.h"
+#include "dali/public-api/actors/actor.h"
+#include <string>
+#include <memory>
 
 namespace dli
 {
@@ -40,7 +40,7 @@ class MatrixStack;
 
 ///@brief Intermediate representation of a scene with functionality required to
 /// create DALi objects (Actors, Renderers) from it.
-class SceneDefinition
+class LIBDLI_API SceneDefinition
 {
 public:  // TYPES
   using NodePredicate = std::function<bool(const NodeDefinition&)>;

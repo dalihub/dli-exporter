@@ -17,6 +17,8 @@
 *
 */
 
+#include "libdli-api.h"
+
 #include "dali/public-api/animation/alpha-function.h"
 #include <string>
 
@@ -25,11 +27,11 @@ namespace dli
 
 ///@return Given a name, provide a Dali::AlphaFunction; if the name was not
 /// recognised, get the default one.
-Dali::AlphaFunction GetAlphaFunction(const std::string& name, bool* found = nullptr);
+Dali::AlphaFunction LIBDLI_API GetAlphaFunction(const std::string& name, bool* found = nullptr);
 
 ///@brief Registers an alpha function only if one with the same @a name has
 /// not yet been registered. Throws Dali::Exception the name isn't unique.
-void RegisterAlphaFunction(const std::string& name, Dali::AlphaFunction alphaFn) noexcept(false);
+void LIBDLI_API RegisterAlphaFunction(const std::string& name, Dali::AlphaFunction alphaFn) noexcept(false);
 
 }
 

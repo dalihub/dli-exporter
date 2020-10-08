@@ -18,6 +18,9 @@
  *
  */
 
+// INTERNAL INCLUDES
+#include "libdli-api.h"
+
 // EXTERNAL INCLUDES
 #include "dali/public-api/common/vector-wrapper.h"
 #include "dali/public-api/images/pixel-data.h"
@@ -33,7 +36,7 @@ namespace dli
 /**
  * @brief Stores the pixel data objects for each face of the cube texture and their mipmaps.
  */
-struct CubeData
+struct LIBDLI_API CubeData
 {
   std::vector< std::vector<Dali::PixelData> > data;
 
@@ -46,7 +49,7 @@ struct CubeData
  * @param[in] path The file path.
  * @param[out] cubedata The data structure with all pixel data objects.
  */
-bool LoadCubeMapData(const std::string& path, CubeData& cubedata);
+LIBDLI_API bool LoadCubeMapData(const std::string& path, CubeData& cubedata);
 
 } // namespace dli
 

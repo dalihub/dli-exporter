@@ -36,7 +36,7 @@ namespace dli
 {
 
 ///@brief The types of resources that .dli may define.
-struct ResourceType
+struct LIBDLI_API ResourceType
 {
   enum Value
   {
@@ -50,14 +50,14 @@ struct ResourceType
 };
 
 ///@return The string value corresponding to the given resource @a type.
-const char* GetResourceTypeName(ResourceType::Value type);
+LIBDLI_API const char* GetResourceTypeName(ResourceType::Value type);
 
 using ResourceRefCounts = std::vector<Dali::Vector<uint32_t>>;
 
 ///@brief Stores all resource definitions along with the DALi resources that
 /// could be created from them, directly indexible into with values from a dli
 /// document.
-class ResourceBundle
+class LIBDLI_API ResourceBundle
 {
 public:
   struct Options

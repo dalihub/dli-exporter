@@ -18,6 +18,10 @@
  * a result of using, modifying or distributing this software or its derivatives.
  */
 
+// INTERNAL INCLUDES
+#include "libdli-api.h"
+
+// EXTERNAL INCLUDES
 #include "dali/public-api/actors/actor.h"
 #include "dali/public-api/animation/animation.h"
 #include "dali/public-api/object/property.h"
@@ -32,7 +36,7 @@ namespace dli
 /// animated property back from the Animation (i.e. past AnimateBetween/By/To()),
 /// changing properties (e.g. from the SDK) requires the whole Animation
 /// object to be recreated with all of its properties (incl. modifications).
-struct AnimatedProperty
+struct LIBDLI_API AnimatedProperty
 {
 public: // METHODS
   ///@brief Function to obtain an Actor based on its name. Its processing will

@@ -17,16 +17,18 @@
  *
  */
 
+ // INTERNAL INCLUDES
+#include "libdli-api.h"
+#include "view-projection.h"
+
 // EXTERNAL INCLUDES
 #include "dali/public-api/math/matrix.h"
 #include "dali/public-api/math/vector3.h"
 
-// INTERNAL INCLUDES
-#include "view-projection.h"
-
 namespace dli
 {
-struct CameraParameters
+
+struct LIBDLI_API CameraParameters
 {
   CameraParameters()
   :  matrix(Dali::Matrix::IDENTITY),

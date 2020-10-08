@@ -16,6 +16,11 @@
 * limitations under the License.
 *
 */
+
+// INTERNAL INCLUDES
+#include "libdli-api.h"
+
+// EXTERNAL INCLUDES
 #include "dali/public-api/rendering/shader.h"
 #include "dali/devel-api/common/set-wrapper.h"
 #include <string>
@@ -54,7 +59,7 @@ namespace dli
 ///@brief Processes a shader, which is using SHADER_DEFINES, with the given defines,
 /// storing its vertex and fragment source and offering capability to instantiate
 /// a new Dali::Shader using them, and the given hints.
-struct ShaderCreator
+struct LIBDLI_API ShaderCreator
 {
   std::string mVertexSource;
   std::string mFragmentSource;
@@ -67,7 +72,7 @@ struct ShaderCreator
 };
 
 ///@return A bitmask of shader hint values that could be obtained from the given @a shader.
-Dali::Shader::Hint::Value GetShaderHints(const Dali::Shader& shader);
+LIBDLI_API Dali::Shader::Hint::Value GetShaderHints(const Dali::Shader& shader);
 
 }
 

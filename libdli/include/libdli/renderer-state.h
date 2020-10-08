@@ -17,6 +17,10 @@
 *
 */
 
+// INTERAL INCLUDES
+#include "libdli-api.h"
+
+// EXTERNAL INCLUDES
 #include "dali/public-api/rendering/renderer.h"
 
 namespace dli
@@ -24,7 +28,7 @@ namespace dli
 
 ///@brief Contains values for comparison functions used in depth and stencil testing.
 ///@note Relative order of members must match Dali::DepthFunction::Type and StencilFunction::Type.
-struct Comparison
+struct LIBDLI_API Comparison
 {
   enum Type
   {
@@ -44,7 +48,7 @@ struct Comparison
 
 ///@brief Determines the blend factor used.
 ///@note Relative order of members must match Dali::BlendFactor::Type.
-struct BlendFactor
+struct LIBDLI_API BlendFactor
 {
   enum Type
   {
@@ -71,7 +75,7 @@ struct BlendFactor
 
 ///@brief Determines which buffers shall the Renderer write into.
 ///@note Relative order of members must match Dali::RenderMode::Type.
-struct BufferMode
+struct LIBDLI_API BufferMode
 {
   enum Type
   {
@@ -89,9 +93,10 @@ struct BufferMode
 ///@brief Contains values and functionality for configuring Renderers.
 namespace RendererState
 {
+
 using Type = uint32_t;  // 8 bits reserved for flags, 4 * 4 bit for blend factors, 4 bits for depth function
 
-enum Value : Type
+enum LIBDLI_API Value : Type
 {
   NONE = 0x0,
 
@@ -124,7 +129,8 @@ enum Value : Type
 
 ///@brief Encodes the given blend factors into a RenderMode value, maskable into other options,
 /// passable into ApplyRenderMode().
-inline constexpr uint32_t FromBlendFactors(BlendFactor::Type srcRgb, BlendFactor::Type destRgb,
+inline
+LIBDLI_API constexpr uint32_t FromBlendFactors(BlendFactor::Type srcRgb, BlendFactor::Type destRgb,
   BlendFactor::Type srcAlpha, BlendFactor::Type destAlpha)
 {
   return (srcRgb | (destRgb << BLEND_FACTOR_ITEM_BITS) | (srcAlpha << (BLEND_FACTOR_ITEM_BITS * 2)) |
@@ -135,9 +141,9 @@ inline constexpr uint32_t FromBlendFactors(BlendFactor::Type srcRgb, BlendFactor
 ///@note Depth function is only set if not Comparison::OMIT.
 ///@note Blend factors are only set if not BlendFactor::OMIT.
 ///@note Buffer mode is only set is not BufferMode::OMIT.
-void Apply(Type renderMode, Dali::Renderer& renderer);
+LIBDLI_API void Apply(Type renderMode, Dali::Renderer& renderer);
 
-}  // RendererState
+} // RendererState
 
 }
 

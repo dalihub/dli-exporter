@@ -18,6 +18,9 @@
 *
 */
 
+// INTERNAL INCLUDES
+#include "libdli-api.h"
+
 // EXTERNAL INCLUDES
 #include "dali/public-api/common/vector-wrapper.h"
 #include "dali/public-api/rendering/texture.h"
@@ -31,7 +34,7 @@ namespace dli
 /**
  * @brief Cache of text textures. Useful to access the texture quickly in order to update the text.
  */
-struct TextCacheItem
+struct LIBDLI_API TextCacheItem
 {
   using Registrator = std::function<void(TextCacheItem&&)>;    ///< Function that TextCacheItems can be posted to as they are created.
   using Localizer = std::string(*)(const std::string&);        ///< Function that attempts to translate a text code to a string.
@@ -49,10 +52,10 @@ struct TextCacheItem
 /**
  * @brief Caches embedded items.
  */
-struct EmbeddedItemCache
+struct LIBDLI_API EmbeddedItemCache
 {
   EmbeddedItemCache()
-  :  pixelBuffer{},
+  : pixelBuffer{},
     url{},
     angle{},
     x{ 0u },
@@ -89,14 +92,14 @@ struct EmbeddedItemCache
   uint16_t height;
 };
 
-extern const std::string TEXT_ACTOR_POSTFIX_NAME;
+LIBDLI_API extern const std::string TEXT_ACTOR_POSTFIX_NAME;
 
 /**
 * @brief Creates a text renderer with the given @p parameters.
 *
 * @param[in,out] parameters The text's parameters.
 */
-void UpdateTextRenderer( TextCacheItem& parameters, std::vector<EmbeddedItemCache>& embeddedItemCache,
+LIBDLI_API void UpdateTextRenderer( TextCacheItem& parameters, std::vector<EmbeddedItemCache>& embeddedItemCache,
   TextCacheItem::Localizer getLocalisedText );
 
 } // namespace dli

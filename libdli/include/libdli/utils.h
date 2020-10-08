@@ -17,6 +17,10 @@
  *
  */
 
+// INTERNAL INCLUDES
+#include "libdli-api.h"
+
+// EXTERNAL INCLUDES
 #include "dali/public-api/actors/actor.h"
 #include "dali/public-api/rendering/renderer.h"
 #include "dali/public-api/common/dali-common.h"
@@ -30,7 +34,7 @@ namespace dli
 /// allocations (which this does not make), is required.
 ///@note All stream insertions that would overflow the buffer that StreamBuffer
 /// was created with, will fail.
-class StreamBuffer : public std::basic_streambuf<char>
+class LIBDLI_API StreamBuffer : public std::basic_streambuf<char>
 {
 public:
   StreamBuffer(char* buffer, size_t size)
@@ -42,19 +46,21 @@ public:
 ///@brief Wraps an ostream with a pre-allocated, fixed size backing buffer
 /// which a message can be formatted into. Upon destruction, it throws a
 /// DaliException with the message.
-class ExceptionFlinger
+class LIBDLI_API ExceptionFlinger
 {
 public:
+  enum { MESSAGE_BUFFER_SIZE = 512 };
+
   ExceptionFlinger(const char* location)
-  :  mLocation(location),
-    mStreamBuffer(sMessageBuffer, sizeof(sMessageBuffer) - 1),
+  : mLocation(location),
+    mStreamBuffer(GetMessageBuffer(), MESSAGE_BUFFER_SIZE - 1),
     mStream(&mStreamBuffer)
   {}
 
   ~ExceptionFlinger() noexcept(false)
   {
     operator<<('\0');
-    throw Dali::DaliException(mLocation, sMessageBuffer);
+    throw Dali::DaliException(mLocation, GetMessageBuffer());
   }
 
   template <typename T>
@@ -65,7 +71,7 @@ public:
   }
 
 private:
-  static thread_local char sMessageBuffer[512];
+  static char* GetMessageBuffer();
 
   const char* mLocation;
   StreamBuffer mStreamBuffer;
@@ -73,21 +79,21 @@ private:
 };
 
 ///@brief Formats the given printf-style varargs into a std::string.
-std::string FormatString(const char* format, ...);
+LIBDLI_API std::string FormatString(const char* format, ...);
 
 ///@return The @n th bit in a bitmask.
-constexpr size_t NthBit(size_t n) { return 1 << n; }
+LIBDLI_API constexpr size_t NthBit(size_t n) { return 1 << n; }
 
 ///@return Whether all of @a mask 's bits are set on @a value.
 inline
-bool MaskMatch(uint32_t value, uint32_t mask)
+LIBDLI_API bool MaskMatch(uint32_t value, uint32_t mask)
 {
   return (value & mask) == mask;
 }
 
 ///@brief Convert a four-letter(, null-terminated) string literal into a uint32_t.
 inline
-constexpr uint32_t FourCC(const char(&fourCC)[5])
+LIBDLI_API constexpr uint32_t FourCC(const char(&fourCC)[5])
 {
   return (fourCC[3] << 24) | (fourCC[2] << 16) | (fourCC[1] << 8) | fourCC[0];
 }
@@ -97,7 +103,7 @@ constexpr uint32_t FourCC(const char(&fourCC)[5])
 ///@param[in] b, compare string
 ///@return true if strings are equal
 inline
-bool CaseInsensitiveCharacterCompare( unsigned char a, unsigned char b )
+LIBDLI_API bool CaseInsensitiveCharacterCompare( unsigned char a, unsigned char b )
 {
   // Converts to lower case in the current locale.
   return std::tolower( a ) == std::tolower( b );
@@ -107,7 +113,7 @@ bool CaseInsensitiveCharacterCompare( unsigned char a, unsigned char b )
 ///@param[in] a, compare string
 ///@param[in] b, compare string
 inline
-bool CaseInsensitiveStringCompare( const std::string& a, const std::string& b )
+LIBDLI_API bool CaseInsensitiveStringCompare( const std::string& a, const std::string& b )
 {
   bool result = false;
   if( a.length() == b.length() )
@@ -121,7 +127,7 @@ bool CaseInsensitiveStringCompare( const std::string& a, const std::string& b )
 /// failure. A pointer to a boolean may be passed in @a fail; this will be set
 /// to true in case of failure (should only be checked if the returned string
 /// was empty()).
-std::string LoadTextFile(const char* path, bool* fail = nullptr);
+LIBDLI_API std::string LoadTextFile(const char* path, bool* fail = nullptr);
 
 ///@brief Makes a number of calls to @a fn, passing to each one the given
 /// @a actor then each of its children, in depth-first traversal.
@@ -130,7 +136,7 @@ std::string LoadTextFile(const char* path, bool* fail = nullptr);
 /// for performance and stability reasons.
 template <typename Func>
 inline
-void VisitActor(Dali::Actor a, Func fn)
+LIBDLI_API void VisitActor(Dali::Actor a, Func fn)
 {
   fn(a);
 
@@ -144,7 +150,7 @@ void VisitActor(Dali::Actor a, Func fn)
 ///@brief Convenience function to set the given actor @a 's anchor point
 /// and parent origin to center.
 inline
-void SetActorCentered(Dali::Actor a)
+LIBDLI_API void SetActorCentered(Dali::Actor a)
 {
   a.SetProperty(Dali::Actor::Property::ANCHOR_POINT, Dali::AnchorPoint::CENTER);
   a.SetProperty(Dali::Actor::Property::PARENT_ORIGIN, Dali::ParentOrigin::CENTER);
@@ -152,7 +158,7 @@ void SetActorCentered(Dali::Actor a)
 
 ///@brief Creates a copy of the given texture set, by creating a new instance and
 /// copying all Texture and Sampler references from it.
-Dali::TextureSet CloneTextures(Dali::TextureSet ts);
+LIBDLI_API Dali::TextureSet CloneTextures(Dali::TextureSet ts);
 
 namespace CloneOptions
 {
@@ -183,7 +189,7 @@ enum Values: Type
 ///@param r The Renderer to clone.
 ///@param cloneOptions A bitmask constructed from the combination of CloneOptions
 /// values (plus any user defined values).
-Dali::Renderer CloneRenderer(Dali::Renderer r, CloneOptions::Type cloneOptions = CloneOptions::NONE);
+LIBDLI_API Dali::Renderer CloneRenderer(Dali::Renderer r, CloneOptions::Type cloneOptions = CloneOptions::NONE);
 
 ///@brief Create a new actor with all conceivable properties and Renderers of
 /// the given actor @a a.
@@ -192,13 +198,13 @@ Dali::Renderer CloneRenderer(Dali::Renderer r, CloneOptions::Type cloneOptions =
 ///@param a The Actor to clone.
 ///@param cloneOptions A bitmask constructed from the combination of CloneOptions
 /// values (plus any user defined values).
-Dali::Actor CloneActor(Dali::Actor a, CloneOptions::Type cloneOptions = CloneOptions::NONE);
+LIBDLI_API Dali::Actor CloneActor(Dali::Actor a, CloneOptions::Type cloneOptions = CloneOptions::NONE);
 
 namespace TexturedQuadOptions
 {
 using Type = uint32_t;
 
-enum Values : Type
+enum LIBDLI_API Values : Type
 {
   NONE = 0x00,
   FLIP_VERTICAL = 0x01,
@@ -207,28 +213,23 @@ enum Values : Type
 }
 
 ///@brief Makes... geometry for a textured quad.
-Dali::Geometry MakeTexturedQuadGeometry(TexturedQuadOptions::Type options = TexturedQuadOptions::NONE);
+LIBDLI_API Dali::Geometry MakeTexturedQuadGeometry(TexturedQuadOptions::Type options = TexturedQuadOptions::NONE);
 
 ///@brief Makes... a textured quad renderer. With back face culling enabled.
 ///@param texture The texture to use as texture 0 of a set we're creating.
 ///@param shader The shader to use with the renderer.
-Dali::Renderer MakeTexturedQuadRenderer(Dali::Texture texture, Dali::Shader shader,
+LIBDLI_API Dali::Renderer MakeTexturedQuadRenderer(Dali::Texture texture, Dali::Shader shader,
   TexturedQuadOptions::Type options = TexturedQuadOptions::NONE);
 
 ///@brief Makes... a textured quad actor. Centered. With back face culling enabled.
 ///@param texture The texture to use as texture 0 of a set we're creating.
 ///@param shader The shader to use with the renderer.
-Dali::Actor MakeTexturedQuadActor(Dali::Texture texture, Dali::Shader shader,
+LIBDLI_API Dali::Actor MakeTexturedQuadActor(Dali::Texture texture, Dali::Shader shader,
   TexturedQuadOptions::Type options = TexturedQuadOptions::NONE);
 
-/**
- * @brief Fixes the path of a file.
- *
- * Replaces the '\\' separator by the '/' one.
- *
- * @param[in,out] path The path to be fixed.
- */
-void ToUnixFileSeparators( std::string& path );
+///@brief Fixes the path of a file. Replaces the '\\' separator by the '/' one.
+///@param[in,out] path The path to be fixed.
+LIBDLI_API void ToUnixFileSeparators( std::string& path );
 
 }
 

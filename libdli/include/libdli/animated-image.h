@@ -30,7 +30,7 @@
 namespace dli
 {
 
-class AnimatedImage : public Dali::ConnectionTracker
+class LIBDLI_API AnimatedImage : public Dali::ConnectionTracker
 {
 public:
   using Ptr = std::unique_ptr<AnimatedImage>;

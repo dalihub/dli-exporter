@@ -18,6 +18,7 @@
  */
 
 // INTERNAL INCLUDES
+#include "libdli-api.h"
 #include "environment-definition.h"
 #include "index.h"
 #include "utils.h"
@@ -30,7 +31,7 @@ namespace dli
 {
 
 ///@brief Helper enum for encoding and decoding sampler states.
-struct SamplerFlags
+struct LIBDLI_API SamplerFlags
 {
   using Type = uint8_t;
 
@@ -91,7 +92,7 @@ struct SamplerFlags
 };
 
 ///@brief Defines a texture from a combination of an image URI and its sampler definition.
-struct TextureDefinition
+struct LIBDLI_API TextureDefinition
 {
   std::string mImageUri;
   SamplerFlags::Type mSamplerFlags;
@@ -106,7 +107,7 @@ struct TextureDefinition
 /// is enabled, and an index of an environment (usually of all environments in a
 /// scene). Textures from the environment are added last when the DALi TextureSet
 /// is being created.
-struct MaterialDefinition
+struct LIBDLI_API MaterialDefinition
 {
   enum Flags : uint32_t
   {

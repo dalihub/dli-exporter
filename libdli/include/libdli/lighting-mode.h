@@ -17,13 +17,18 @@
  * limitations under the License.
  *
  */
+
+// INTERNAL INCLUDES
+#include "libdli-api.h"
+
+// EXTERNAL INCLUDES
 #include <cstdint>
 #include <string>
 
 namespace dli
 {
 
-struct LightingMode
+struct LIBDLI_API LightingMode
 {
   enum Type
   {

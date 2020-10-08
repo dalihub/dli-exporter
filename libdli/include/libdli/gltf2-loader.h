@@ -16,6 +16,11 @@
  * limitations under the License.
  *
  */
+
+ // INTERNAL INCLUDES
+#include "libdli-api.h"
+
+// EXTERNAL INCLUDES
 #include <string>
 
 namespace gltf2
@@ -32,10 +37,10 @@ class ShaderDefinitionFactory;
 ///@brief Loads the scene from the glTF file located at @a url, storing the results in @a params.
 ///@note Will throw std::runtime_error for JSON entities with types mismatching expectations, carrying
 /// invalid values, or I/O errors.
-void LoadGltfScene(const std::string& url, ShaderDefinitionFactory& shaderFactory, LoadResult& params);
+LIBDLI_API void LoadGltfScene(const std::string& url, ShaderDefinitionFactory& shaderFactory, LoadResult& params);
 
 ///@brief Utility function to convert a gltf camera to our runtime representation.
-void ConvertCamera(const gltf2::Camera& gltfCamera, CameraParameters& result);
+LIBDLI_API void ConvertCamera(const gltf2::Camera& gltfCamera, CameraParameters& result);
 
 } // namespace dli
 

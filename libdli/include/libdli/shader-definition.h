@@ -32,7 +32,7 @@ namespace dli
 ///@brief Defines a shader with paths to the files which define its
 /// vertex and fragment components, and a mapping of uniform names (which are
 /// used to refer to them in GLSL) to data.
-struct ShaderDefinition
+struct LIBDLI_API ShaderDefinition
 {
   using Vector = std::vector<std::pair<ShaderDefinition, Dali::Shader>>;
 

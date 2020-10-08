@@ -17,7 +17,8 @@
  *
  */
 
-// INTERNAL INCLUDES
+ // INTERNAL INCLUDES
+#include "libdli-api.h"
 #include "ktx-loader.h"
 
 // EXTERNAL INCLUDES
@@ -29,7 +30,7 @@ namespace dli
 
 ///@brief Defines an environment map with either or both of radiance
 /// and irradiance maps.
-struct EnvironmentDefinition
+struct LIBDLI_API EnvironmentDefinition
 {
   struct Textures
   {

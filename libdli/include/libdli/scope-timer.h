@@ -16,7 +16,10 @@
 * limitations under the License.
 *
 */
+// INTERNAL_INCLUDES
 #include "hash.h"
+
+// EXTERNAL INCLUDES
 #include "dali/devel-api/common/map-wrapper.h"
 #include <algorithm>
 #include <chrono>
@@ -35,7 +38,7 @@ namespace dli
 ///@note The parent frame, if any, forms part of the "location", e.g. trying to measure
 /// the length of 3 functions, A(), B() and C(), where C() is called from both A() and B()
 /// will create 4 entries: A(), C() from A(), B(), C() from B().
-class ScopeTimer
+class LIBDLI_API ScopeTimer
 {
 public:
   ///@brief Finishes processing and writes the results to the file called @a filename

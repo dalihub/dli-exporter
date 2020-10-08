@@ -35,7 +35,7 @@ namespace RendererState
 ///  course is only suitable i the string is null-terminated.
 ///@param onError The callback to call when an error occurred.
 ///@note No other characters are allowed.
-Type Parse(const char* string, size_t length = 0, StringCallback onError = DefaultErrorCallback);
+LIBDLI_API Type Parse(const char* string, size_t length = 0, StringCallback onError = DefaultErrorCallback);
 
 }
 }

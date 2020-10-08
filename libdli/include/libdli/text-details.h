@@ -17,6 +17,10 @@
 *
 */
 
+// INTERNAL
+#include "text-cache-item.h"
+#include "matrix-stack.h"
+
 // EXTERNAL
 #include "dali-toolkit/devel-api/text/text-utils-devel.h"
 #include "dali-toolkit/public-api/image-loader/sync-image-loader.h"
@@ -26,10 +30,6 @@
 #include <limits>
 #include <string>
 
-// INTERNAL
-#include "text-cache-item.h"
-#include "matrix-stack.h"
-
 namespace dli
 {
 
@@ -38,13 +38,13 @@ class ViewProjection;
 /**
 * @brief The units of the font's size.
 */
-enum class FontSizeUnits
+enum class LIBDLI_API FontSizeUnits
 {
   POINTS,
   PIXELS
 };
 
-struct TextParameters
+struct LIBDLI_API TextParameters
 {
   Dali::Renderer renderer;       ///< The renderer.
   Dali::Vector3 bottomRight;     ///< The bottom-right corner of the quad.
@@ -58,7 +58,7 @@ struct TextParameters
  * @return The given number of @a pixels in points, based on the DPI value that
  * Evas and Dali report.
  */
-float PixelsToPoints(int pixels);
+LIBDLI_API float PixelsToPoints(int pixels);
 
 /**
  * @brief Calculates the geometry for the quad used to render the text when the mesh is given in model/world coordinates.
@@ -70,11 +70,11 @@ float PixelsToPoints(int pixels);
  * @param[in,out] textRenderer Contains the geometry and all the text parameters needed to build the text renderer.
  * @param[out] size The size of the bounding box in screen coordinates.
  */
-void CalculateGeometry(const ViewProjection& viewProjection, const Dali::Matrix& model,
+LIBDLI_API void CalculateGeometry(const ViewProjection& viewProjection, const Dali::Matrix& model,
   TextParameters& textParameters, Dali::Size& size);
 
 
-void CreateTextGeometryAndTexture(TextParameters& parameters, TextCacheItem& textCacheItem,
+LIBDLI_API void CreateTextGeometryAndTexture(TextParameters& parameters, TextCacheItem& textCacheItem,
   bool generateBarycentrics, bool& isRgbaColorText);
 
 }
