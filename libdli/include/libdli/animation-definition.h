@@ -18,6 +18,7 @@
  * a result of using, modifying or distributing this software or its derivatives.
  */
 
+#include "libdli-api.h"
 #include "animated-property.h"
 #include "dali/public-api/common/vector-wrapper.h"
 
@@ -25,7 +26,7 @@ namespace dli
 {
 
 ///@brief Animation handle + name + definition of properties.
-class AnimationDefinition
+class LIBDLI_API AnimationDefinition
 {
 public: // STATIC
   // For Animations created in the SDK.

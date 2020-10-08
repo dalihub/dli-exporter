@@ -30,7 +30,15 @@ using namespace Dali;
 namespace dli
 {
 
-thread_local char ExceptionFlinger::sMessageBuffer[];
+namespace
+{
+thread_local char sExceptionFlingerMessageBuffer[ExceptionFlinger::MESSAGE_BUFFER_SIZE]{};
+}
+
+char* ExceptionFlinger::GetMessageBuffer()
+{
+  return sExceptionFlingerMessageBuffer;
+}
 
 std::string FormatString(const char* format, ...)
 {

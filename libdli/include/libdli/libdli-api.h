@@ -1,7 +1,7 @@
-#ifndef LIBDLI_STRING_CALLBACK_H
-#define LIBDLI_STRING_CALLBACK_H
+#ifndef LIBDLI_SHARED_LIB_H
+#define LIBDLI_SHARED_LIB_H
 /*
- * Copyright (c) 2020 Samsung Electronics Co., Ltd.
+ * Copyright (c) 2019 Samsung Electronics Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,22 +17,14 @@
  *
  */
 
-// INTERNAL INCLUDES
-#include "libdli-api.h"
+#ifdef LIBDLI_SHARED
+#ifdef BUILDING_LIBDLI
+#define LIBDLI_API  __declspec(dllexport)
+#else
+#define LIBDLI_API  __declspec(dllimport)
+#endif  // BUILDING_LIBDLI
+#else
+#define LIBDLI_API
+#endif  // LIBDLI_SHARED
 
-// EXTERNAL INCLUDES
-#include <functional>
-#include <string>
-
-namespace dli
-{
-
-///@brief A callback to post strings to.
-using StringCallback = std::function<void(const std::string&)>;
-
-///@brief Simply passes the formatted message to LOGE().
-LIBDLI_API void DefaultErrorCallback(const std::string& message);
-
-}
-
-#endif //LIBDLI_STRING_CALLBACK_H
+#endif

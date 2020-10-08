@@ -13,9 +13,9 @@ endforeach(flag)
 
 set(prj_cxx_std c++17)
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-	set(extra_flags "${extra_flags} -fPIE -std=${prj_cxx_std}")
+	set(extra_flags "${extra_flags} -fPIC -std=${prj_cxx_std}")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-	set(extra_flags "${extra_flags} -fPIE -std=${prj_cxx_std}")
+	set(extra_flags "${extra_flags} -fPIC -std=${prj_cxx_std}")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
 	set(extra_flags "${extra_flags} /std:${prj_cxx_std} /vmg /D_USE_MATH_DEFINES /D_CRT_SECURE_NO_WARNINGS /MP /GS /Oi /GL /EHsc")
 endif()
@@ -35,7 +35,7 @@ include_directories(${libdli_include_dir}
 	${prefix_include_dir}
 )
 
-add_library(${libdli_prj_name} STATIC ${libdli_src_files})
+add_library(${libdli_prj_name} SHARED ${libdli_src_files})
 install(TARGETS ${libdli_prj_name} DESTINATION ${prefix}/lib)
 
 file(GLOB libdli_include_files "${libdli_include_dir}**")

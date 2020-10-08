@@ -16,8 +16,12 @@
 * limitations under the License.
 *
 */
+
+// INTERNAL INCLUDES
 #include "index.h"
-#include <map>
+
+// EXTERNAL INCLUDES
+#include "dali/devel-api/common/map-wrapper.h"
 
 namespace dli
 {
@@ -25,7 +29,7 @@ namespace dli
 struct NodeDefinition;
 class ResourceBundle;
 
-class ShaderDefinitionFactory
+class LIBDLI_API ShaderDefinitionFactory
 {
 public:
   ///@brief Input for meshes and materials, output for shaders.

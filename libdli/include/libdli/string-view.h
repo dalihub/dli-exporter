@@ -16,6 +16,10 @@
  * limitations under the License.
  *
  */
+// INTERNAL INCLUDES
+#include "libdli-api.h"
+
+// EXTERNAL INCLUDES
 #include <string>
 
 namespace dli
@@ -24,7 +28,7 @@ namespace dli
 ///@brief View of a string, typically from the original json buffer. This saves on allocations.
 ///@note Shouldn't outlive the buffer it was created from, and any lingering instances mustn't be
 /// used once that's gone.
-struct StringView
+struct LIBDLI_API StringView
 {
   StringView() = default;
   StringView(const char* cs);

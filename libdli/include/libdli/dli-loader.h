@@ -17,19 +17,20 @@
  *
  */
 
-// EXTERNAL INCLUDES
-#include "dali/public-api/common/vector-wrapper.h"
-#include "dali/devel-api/common/map-wrapper.h"
-
-#include "dali-toolkit/devel-api/builder/json-parser.h"
-
-// INTERNAL INCLUDES
+ // INTERNAL INCLUDES
+#include "libdli-api.h"
 #include "animation-definition.h"
 #include "lighting-mode.h"
 #include "text-cache-item.h"
 #include "customization.h"
 #include "string-callback.h"
 #include "index.h"
+
+// EXTERNAL INCLUDES
+#include "dali/public-api/common/vector-wrapper.h"
+#include "dali/devel-api/common/map-wrapper.h"
+
+#include "dali-toolkit/devel-api/builder/json-parser.h"
 
 namespace dli
 {
@@ -45,7 +46,7 @@ class ResourceBundle;
 struct NodeDefinition;
 class SceneDefinition;
 
-class DliLoader
+class LIBDLI_API DliLoader
 {
 public:
   using ConvertFontCode = void(*)(const std::string& code, std::string& fontFamily, std::string& slant, std::string& weight, float& size);

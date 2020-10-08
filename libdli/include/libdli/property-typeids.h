@@ -16,6 +16,11 @@
  * limitations under the License.
  *
  */
+
+// INTERNAL INCLUDES
+#include "libdli-api.h"
+
+// EXTERNAL INCLUDES
 #include "dali/public-api/object/property.h"
 #include <string>
 #include <cstdint>
@@ -24,13 +29,13 @@ namespace dli
 {
 
 ///@return A fourCC relating to the given Dali::Property::Type.
-uint32_t GetPropertyTypeId(Dali::Property::Type type);
+LIBDLI_API uint32_t GetPropertyTypeId(Dali::Property::Type type);
 
 ///@return A fourCC string relating to the given Dali::Property::Type.
-std::string GetPropertyTypeIdString(Dali::Property::Type type);
+LIBDLI_API std::string GetPropertyTypeIdString(Dali::Property::Type type);
 
 ///@return Property type enum value based on fourCC typeId, NONE if invalid.
-Dali::Property::Type DecodePropertyTypeId(uint32_t typeId);
+LIBDLI_API Dali::Property::Type DecodePropertyTypeId(uint32_t typeId);
 
 }
 

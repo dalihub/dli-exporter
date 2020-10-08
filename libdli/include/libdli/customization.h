@@ -18,6 +18,10 @@
  *
  */
 
+ // INTERNAL INCLUDES
+#include "libdli-api.h"
+
+// EXTERNAL INCLUDES
 #include "dali/public-api/common/vector-wrapper.h"
 #include "dali/devel-api/common/map-wrapper.h"
 #include <string>
@@ -28,7 +32,7 @@ namespace dli
 ///@brief Offers a description of an aspect of the watch face that can be customized:
 ///    the number of options, and the name of the nodes that are registered
 ///    for the tag, whose children will be shown / hidden based on selection.
-struct Customization
+struct LIBDLI_API Customization
 {
   using Tag = std::string;
   using Map = std::map<Tag, Customization>;

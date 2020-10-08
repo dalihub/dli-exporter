@@ -17,14 +17,17 @@
 *
 */
 
-// EXTERNAL
+// INTERNAL INCLUDES
+#include "libdli-api.h"
+
+// EXTERNAL INCLUDES
 #include "dali/public-api/rendering/geometry.h"
 #include "dali/public-api/rendering/texture.h"
 
 namespace dli
 {
 
-struct MeshGeometry
+struct LIBDLI_API MeshGeometry
 {
   Dali::Geometry geometry;                         ///< The array of vertices.
   Dali::Texture blendShapeGeometry;                ///< The array of vertices of the different blend shapes encoded inside a texture with power of two dimensions.

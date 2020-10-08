@@ -16,6 +16,11 @@
  * limitations under the License.
  *
  */
+
+// INTERNAL INCLUDES
+#include "libdli-api.h"
+
+// EXTERNAL INCLUDES
 #include <cstdint>
 
 namespace dli
@@ -23,7 +28,7 @@ namespace dli
 
 using Index = uint32_t;
 
-enum : Index { INVALID_INDEX = static_cast<Index>(-1) };
+enum LIBDLI_API : Index { INVALID_INDEX = static_cast<Index>(-1) };
 
 }
 

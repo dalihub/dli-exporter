@@ -16,6 +16,11 @@
 * limitations under the License.
 *
 */
+
+// INTERNAL INCLUDES
+#include "libdli-api.h"
+
+// EXTERNAL INCLUDES
 #include <string>
 #include <cstring>
 #include <cstdint>
@@ -23,7 +28,7 @@
 namespace
 {
 
-class Hash
+class LIBDLI_API Hash
 {
 public:
   static constexpr uint64_t DEFAULT_SEED = 61081;

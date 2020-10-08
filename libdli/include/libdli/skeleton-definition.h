@@ -31,7 +31,7 @@ namespace dli
 ///@note The list of joints must not be empty and must not contain INVALID_INDEX.
 ///@note Client code should not change the order of joints, as they are indexed by mesh vertex data.
 ///@note Client code should make no assumption about the relation of the joint IDs.
-struct SkeletonDefinition
+struct LIBDLI_API SkeletonDefinition
 {
   struct Joint
   {

@@ -16,8 +16,12 @@
  * limitations under the License.
  *
  */
+
+// INTERNAL INCLUDES
 #include "string-view.h"
 #include "json.h"
+
+// EXTERNAL INCLUDES
 #include "dali/public-api/common/vector-wrapper.h"
 #include <algorithm>
 #include <map>
@@ -41,23 +45,23 @@ typedef std::unique_ptr<json_value_s, json_value_deleter> unique_ptr;
 
 ///@brief Case sensitive comparison of json_string_s and c-string.
 ///@return difference in first different character, or 0 if the strings are identical.
-int StrCmp(const json_string_s& js, const char* s);
+LIBDLI_API int StrCmp(const json_string_s& js, const char* s);
 
 ///@brief Case sensitive comparison of json_string_s and std::string.
 ///@return difference in first different character, or 0 if the strings are identical.
-int StrCmp(const json_string_s& js, const std::string& s);
+LIBDLI_API int StrCmp(const json_string_s& js, const std::string& s);
 
 ///@brief Convenience function to compare json_string_s and other supported string type,
 /// in swapped order.
 template <typename String>
 inline
-  int StrCmp(String& s, const json_string_s& js)
+LIBDLI_API int StrCmp(String& s, const json_string_s& js)
 {
   return -StrCmp(js, s);
 }
 
 ///@brief Checks @a jv to be the given @a type, otherwise a std::runtime_error is thrown.
-void Validate(const json_value_s& jv, json_type_e type);
+LIBDLI_API void Validate(const json_value_s& jv, json_type_e type);
 
 namespace detail
 {
@@ -81,7 +85,7 @@ TYPE2ENUM(number)
 ///@brief Casts the payload of a json_value_s to the given type.
 template <typename Out>
 inline
-  const Out& Cast(const json_value_s& j)
+LIBDLI_API const Out& Cast(const json_value_s& j)
 {
   Validate(j, static_cast<json_type_e>(detail::Type2Enum<typename std::decay<Out>::type>::VALUE));
   return *static_cast<const Out*>(j.payload);
@@ -91,7 +95,7 @@ inline
 ///@note std::runtime_error is thrown if the value is not the given type.
 template <typename Out>
 inline
-  Out& Cast(json_value_s& j)
+LIBDLI_API Out& Cast(json_value_s& j)
 {
   Validate(j, static_cast<json_type_e>(detail::Type2Enum<typename std::decay<Out>::type>::VALUE));
   return *static_cast<Out*>(j.payload);
@@ -99,10 +103,10 @@ inline
 
 ///@brief Helper function to find a child element of @a obj mapped to @a key.
 ///@return Pointer to the element, or nullptr if it could not be found.
-json_value_s* FindObjectChild(const std::string& key, json_object_s& obj);
+LIBDLI_API json_value_s* FindObjectChild(const std::string& key, json_object_s& obj);
 
 ///@brief Helper functions for reading various value types.
-struct Read
+struct LIBDLI_API Read
 {
   static bool Boolean(const json_value_s& j)
   {
@@ -174,7 +178,7 @@ struct Read
 };
 
 ///@brief Core class for object properties.
-struct PropertyCore
+struct LIBDLI_API PropertyCore
 {
 protected:
   explicit PropertyCore(const std::string& key)
@@ -275,14 +279,14 @@ private:
 
 ///@brief Helper function to make a Property for a member of type U, of object of type T.
 template <class T, typename U>
-Property<T, U>* MakeProperty(const std::string& key, typename Property<T, U>::ReadFn readFn,
+LIBDLI_API Property<T, U>* MakeProperty(const std::string& key, typename Property<T, U>::ReadFn readFn,
   U T::* ptr)
 {
   return new Property<T, U>(key, readFn, ptr);
 }
 
 ///@brief Core class for an object Reader.
-struct ReaderCore
+struct LIBDLI_API ReaderCore
 {
 protected:
   std::vector<void*> mProperties;
@@ -375,7 +379,7 @@ private:
 ///@brief Wraps a Reader<T> in a function usable as a Property<T>::ReadFn, i.e. to facilitate
 /// deserializing structures of nested objects.
 template <typename T>
-struct ObjectReader
+struct LIBDLI_API ObjectReader
 {
   static const Reader<T>* sReader;
 
@@ -389,10 +393,10 @@ struct ObjectReader
 };
 
 template <typename T>
-const Reader<T>* ObjectReader<T>::sReader = nullptr;
+LIBDLI_API const Reader<T>* ObjectReader<T>::sReader = nullptr;
 
 template <typename T>
-void SetObjectReader(const Reader<T>& r)
+LIBDLI_API void SetObjectReader(const Reader<T>& r)
 {
   ObjectReader<T>::sReader = &r;
 }

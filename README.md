@@ -36,6 +36,7 @@ There are two main modules in the package:
 ## Build instructions
 
 1, build the DALi libraries and dali-demo (either using VCPKG or manually);
+
 2,
 
   - Windows: refer to the VS2017 solution in build/windows;

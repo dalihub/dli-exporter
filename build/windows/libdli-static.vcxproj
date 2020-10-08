@@ -54,6 +54,7 @@
     <ClInclude Include="..\..\libdli\include\libdli\json-util.h" />
     <ClInclude Include="..\..\libdli\include\libdli\json.h" />
     <ClInclude Include="..\..\libdli\include\libdli\ktx-loader.h" />
+    <ClInclude Include="..\..\libdli\include\libdli\libdli-api.h" />
     <ClInclude Include="..\..\libdli\include\libdli\light-parameters.h" />
     <ClInclude Include="..\..\libdli\include\libdli\lighting-mode.h" />
     <ClInclude Include="..\..\libdli\include\libdli\load-result.h" />
@@ -71,7 +72,6 @@
     <ClInclude Include="..\..\libdli\include\libdli\shader-definition-factory.h" />
     <ClInclude Include="..\..\libdli\include\libdli\shader-definition.h" />
     <ClInclude Include="..\..\libdli\include\libdli\shader-utils.h" />
-    <ClInclude Include="..\..\libdli\include\libdli\libdli-api.h" />
     <ClInclude Include="..\..\libdli\include\libdli\skeleton-definition.h" />
     <ClInclude Include="..\..\libdli\include\libdli\skinning-details.h" />
     <ClInclude Include="..\..\libdli\include\libdli\string-callback.h" />
@@ -121,59 +121,60 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{F075F638-8552-44B2-9B51-74B6BC6CC06A}</ProjectGuid>
-    <RootNamespace>libdlidll</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
-    <ProjectName>libdli</ProjectName>
+    <ProjectGuid>{E080A2AD-7BC0-4A5F-A5E0-19F1A391BE60}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>libdli</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <ProjectName>libdli-static</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -213,13 +214,11 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir).artifacts\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir).intermediate\$(ProjectName)\$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir).artifacts\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir).intermediate\$(ProjectName)\$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -231,13 +230,11 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir).artifacts\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir).intermediate\$(ProjectName)\$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir).artifacts\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir).intermediate\$(ProjectName)\$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -251,7 +248,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>LIBDLI_SHARED;BUILDING_LIBDLI;DEBUG_ENABLED;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)../../libdli/include;../../windows-dependencies/include;../../dali-core;../../dali-adaptor;../../dali-toolkit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/vmg  /wd4251 %(AdditionalOptions)</AdditionalOptions>
@@ -266,7 +263,6 @@
     </Link>
     <PostBuildEvent>
       <Command>call $(SolutionDir)install.bat $(TargetPath)
-call $(SolutionDir)install.bat $(TargetDir)$(TargetName).lib
 call $(SolutionDir)install-headers.bat</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -276,7 +272,7 @@ call $(SolutionDir)install-headers.bat</Command>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>LIBDLI_SHARED;BUILDING_LIBDLI;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)../../libdli/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/vmg  /wd4251 %(AdditionalOptions)</AdditionalOptions>
@@ -292,7 +288,6 @@ call $(SolutionDir)install-headers.bat</Command>
     </Link>
     <PostBuildEvent>
       <Command>call $(SolutionDir)install.bat $(TargetPath)
-call $(SolutionDir)install.bat $(TargetDir)$(TargetName).lib
 call $(SolutionDir)install-headers.bat</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -332,7 +327,7 @@ call $(SolutionDir)install-headers.bat</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>LIBDLI_SHARED;BUILDING_LIBDLI;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)../../libdli/include;../../windows-dependencies/include;../../dali-core;../../dali-adaptor;../../dali-toolkit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/vmg  /wd4251 %(AdditionalOptions)</AdditionalOptions>
@@ -349,7 +344,6 @@ call $(SolutionDir)install-headers.bat</Command>
     </Link>
     <PostBuildEvent>
       <Command>call $(SolutionDir)install.bat $(TargetPath)
-call $(SolutionDir)install.bat $(TargetDir)$(TargetName).lib
 call $(SolutionDir)install-headers.bat</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -361,7 +355,7 @@ call $(SolutionDir)install-headers.bat</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>LIBDLI_SHARED;BUILDING_LIBDLI;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)../../libdli/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/vmg  /wd4251 %(AdditionalOptions)</AdditionalOptions>
@@ -378,7 +372,6 @@ call $(SolutionDir)install-headers.bat</Command>
     </Link>
     <PostBuildEvent>
       <Command>call $(SolutionDir)install.bat $(TargetPath)
-call $(SolutionDir)install.bat $(TargetDir)$(TargetName).lib
 call $(SolutionDir)install-headers.bat</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

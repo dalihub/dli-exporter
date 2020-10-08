@@ -28,24 +28,24 @@
 namespace dli
 {
 
-bool ReadBool(const Dali::Toolkit::TreeNode* node, bool& num);
+LIBDLI_API bool ReadBool(const Dali::Toolkit::TreeNode* node, bool& num);
 
-bool ReadInt(const Dali::Toolkit::TreeNode* node, int& num);
+LIBDLI_API bool ReadInt(const Dali::Toolkit::TreeNode* node, int& num);
 
-bool ReadFloat(const Dali::Toolkit::TreeNode* node, float& num);
+LIBDLI_API bool ReadFloat(const Dali::Toolkit::TreeNode* node, float& num);
 
-bool ReadIndex(const Dali::Toolkit::TreeNode* node, Index& num);
+LIBDLI_API bool ReadIndex(const Dali::Toolkit::TreeNode* node, Index& num);
 
-bool ReadBlob(const Dali::Toolkit::TreeNode* node, unsigned int& offset, unsigned int& length);
-
+LIBDLI_API bool ReadBlob(const Dali::Toolkit::TreeNode* node, unsigned int& offset, unsigned int& length);
 
 ///@brief Gets the number of numerical element of a JSON array;
 ///@return 0 if not an array, otherwise the number of float or integer elements
 /// at the front of the array.
-size_t GetNumericalArraySize(const Dali::Toolkit::TreeNode* node);
+LIBDLI_API size_t GetNumericalArraySize(const Dali::Toolkit::TreeNode* node);
 
-bool ReadVector(const Dali::Toolkit::TreeNode* node, float* num, unsigned int size);
-bool ReadVector(const Dali::Toolkit::TreeNode* node, int* num, unsigned int size);
+LIBDLI_API bool ReadVector(const Dali::Toolkit::TreeNode* node, float* num, unsigned int size);
+
+LIBDLI_API bool ReadVector(const Dali::Toolkit::TreeNode* node, int* num, unsigned int size);
 
 ///@brief Reads a color.
 ///
@@ -55,18 +55,18 @@ bool ReadVector(const Dali::Toolkit::TreeNode* node, int* num, unsigned int size
 ///@param[out] color The RGBA color.
 ///
 ///@return true if succedded to read the color.
-bool ReadColor(const Dali::Toolkit::TreeNode* node, Dali::Vector4& color);
+LIBDLI_API bool ReadColor(const Dali::Toolkit::TreeNode* node, Dali::Vector4& color);
 
-bool ReadTimePeriod(const Dali::Toolkit::TreeNode* node, Dali::TimePeriod& timePeriod);
+LIBDLI_API bool ReadTimePeriod(const Dali::Toolkit::TreeNode* node, Dali::TimePeriod& timePeriod);
 
-bool ReadString(const Dali::Toolkit::TreeNode* node, std::string& strValue);
+LIBDLI_API bool ReadString(const Dali::Toolkit::TreeNode* node, std::string& strValue);
 
-bool ReadStringVector(const Dali::Toolkit::TreeNode* node, std::vector<std::string>& strvector);
+LIBDLI_API bool ReadStringVector(const Dali::Toolkit::TreeNode* node, std::vector<std::string>& strvector);
 
 ///@brief Attempts to read a property of the given type from the given JSON node.
 ///@return The property value that it could interpret. If unsuccessful, its type will be NONE.
 ///@note Currently only numerical types are supported (including boolean).
-Dali::Property::Value ReadPropertyValue(const Dali::Property::Type& propType, const Dali::Toolkit::TreeNode& tn);
+LIBDLI_API Dali::Property::Value ReadPropertyValue(const Dali::Property::Type& propType, const Dali::Toolkit::TreeNode& tn);
 
 ///@brief Attempts to read a property, whose type it will attempt to determine from the given
 /// JSON node.
@@ -75,7 +75,7 @@ Dali::Property::Value ReadPropertyValue(const Dali::Property::Type& propType, co
 ///@note Supports a disambiguation syntax, whereby the type can be specified explicitly:
 /// { "type": "rotation", "value": [...] } .
 ///@note: rotation / rectangle / extents type properties must be disambiguated in all circumstances.
-Dali::Property::Value ReadPropertyValue(const Dali::Toolkit::TreeNode& tn);
+LIBDLI_API Dali::Property::Value ReadPropertyValue(const Dali::Toolkit::TreeNode& tn);
 
 }
 

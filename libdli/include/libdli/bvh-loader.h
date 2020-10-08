@@ -32,7 +32,7 @@ using BhvHierarchyPtr = std::unique_ptr <BvhHierarchy, void(*)(BvhHierarchy*)> ;
 ///@return An opaque handle to the resulting BvhHierarchy; nullptr if the loading or parsing of the
 /// file has failed.
 ///@note Throws DaliException on failure.
-BhvHierarchyPtr LoadBvhHierarchy(const std::string& url, float scale = 1.f);
+BhvHierarchyPtr LIBDLI_API LoadBvhHierarchy(const std::string& url, float scale = 1.f);
 
 ///@brief Attempts to load a motion file for the given @a hierarchy, from the given @a url, in the
 /// binary BioVision Hierarchy MOTION format, which is as follows:<br/>
@@ -47,7 +47,7 @@ BhvHierarchyPtr LoadBvhHierarchy(const std::string& url, float scale = 1.f);
 ///@return AnimationDefinition for the translations and rotations of the joints of the given
 /// @a hierarchy.
 ///@note Throws DaliException on failure.
-AnimationDefinition LoadBvhMotion(const std::string& url, BvhHierarchy const& hierarchy);
+AnimationDefinition LIBDLI_API LoadBvhMotion(const std::string& url, BvhHierarchy const& hierarchy);
 
 }
 

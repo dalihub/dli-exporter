@@ -16,8 +16,13 @@
  * limitations under the License.
  *
  */
+
+// INTERNAL INCLUDES
+#include "libdli-api.h"
 #include "json-reader.h"
 #include "index.h"
+
+// EXTERNAL INCLUDES
 #include "dali/public-api/math/vector4.h"
 #include "dali/public-api/math/quaternion.h"
 #include "dali/public-api/common/vector-wrapper.h"
@@ -29,7 +34,7 @@ namespace gltf2
 {
 
 template <typename T>
-struct Ref
+struct LIBDLI_API Ref
 {
   Ref() = default;
   Ref(std::vector<T>& v, dli::Index i)
@@ -68,12 +73,12 @@ private:
   dli::Index mIndex = dli::INVALID_INDEX;
 };
 
-struct Asset
+struct LIBDLI_API Asset
 {
   dli::StringView mVersion;
 };
 
-struct Component
+struct LIBDLI_API Component
 {
   enum Type
   {
@@ -92,7 +97,7 @@ struct Component
   Component() = delete;
 };
 
-struct AccessorType
+struct LIBDLI_API AccessorType
 {
   enum Type
   {
@@ -113,7 +118,7 @@ struct AccessorType
   AccessorType() = delete;
 };
 
-struct AlphaMode
+struct LIBDLI_API AlphaMode
 {
   enum Type
   {
@@ -128,7 +133,7 @@ struct AlphaMode
   AlphaMode() = delete;
 };
 
-struct Attribute
+struct LIBDLI_API Attribute
 {
   enum Type
   {
@@ -148,7 +153,7 @@ struct Attribute
   Attribute() = delete;
 };
 
-struct Buffer
+struct LIBDLI_API Buffer
 {
   uint32_t mByteLength;
   dli::StringView mUri;
@@ -156,7 +161,7 @@ struct Buffer
   //TODO: extras
 };
 
-struct BufferView
+struct LIBDLI_API BufferView
 {
   struct Target
   {
@@ -179,20 +184,20 @@ struct BufferView
   //TODO: extras
 };
 
-struct BufferViewClient
+struct LIBDLI_API BufferViewClient
 {
   Ref<BufferView> mBufferView;
   uint32_t mByteOffset = 0;
 };
 
-struct ComponentTypedBufferViewClient : BufferViewClient
+struct LIBDLI_API ComponentTypedBufferViewClient : BufferViewClient
 {
   Component::Type mComponentType = Component::INVALID;
 
   uint32_t GetBytesPerComponent() const;
 };
 
-struct Named
+struct LIBDLI_API Named
 {
   dli::StringView mName;
 
@@ -200,7 +205,7 @@ protected:
   Named() = default;
 };
 
-struct Accessor : ComponentTypedBufferViewClient, Named
+struct LIBDLI_API Accessor : ComponentTypedBufferViewClient, Named
 {
   struct Sparse
   {
@@ -236,7 +241,7 @@ struct Accessor : ComponentTypedBufferViewClient, Named
   }
 };
 
-struct Image: Named
+struct LIBDLI_API Image: Named
 {
   dli::StringView mUri;
   dli::StringView mMimeType;
@@ -245,7 +250,7 @@ struct Image: Named
   //TODO: extras
 };
 
-struct Filter
+struct LIBDLI_API Filter
 {
   enum Type
   {
@@ -260,7 +265,7 @@ struct Filter
   Filter() = delete;
 };
 
-struct Wrap
+struct LIBDLI_API Wrap
 {
   enum Type
   {
@@ -272,7 +277,7 @@ struct Wrap
   Wrap() = delete;
 };
 
-struct Sampler
+struct LIBDLI_API Sampler
 {
   Filter::Type mMinFilter = Filter::LINEAR;
   Filter::Type mMagFilter = Filter::LINEAR;
@@ -282,13 +287,13 @@ struct Sampler
   //TODO: extras
 };
 
-struct Texture
+struct LIBDLI_API Texture
 {
   Ref<Image> mSource;
   Ref<Sampler> mSampler;
 };
 
-struct TextureInfo
+struct LIBDLI_API TextureInfo
 {
   Ref<gltf2::Texture> mTexture;
   uint32_t mTexCoord = 0;
@@ -300,7 +305,7 @@ struct TextureInfo
   }
 };
 
-struct Material: Named
+struct LIBDLI_API Material: Named
 {
   struct Pbr//MetallicRoughness
   {
@@ -325,7 +330,7 @@ struct Material: Named
   //TODO: extras
 };
 
-struct Mesh: Named
+struct LIBDLI_API Mesh: Named
 {
   struct Primitive
   {
@@ -360,7 +365,7 @@ struct Mesh: Named
 
 struct Node;
 
-struct Skin : Named
+struct LIBDLI_API Skin : Named
 {
   Ref<Accessor> mInverseBindMatrices;
   Ref<Node> mSkeleton;
@@ -369,7 +374,7 @@ struct Skin : Named
   //TODO: extensions
 };
 
-struct Camera: Named
+struct LIBDLI_API Camera: Named
 {
   struct Perspective
   {
@@ -398,7 +403,7 @@ struct Camera: Named
   //TODO: extensions
 };
 
-struct Node: Named
+struct LIBDLI_API Node: Named
 {
   Dali::Vector3 mTranslation = Dali::Vector3::ZERO;
   Dali::Quaternion mRotation = Dali::Quaternion::IDENTITY;
@@ -416,7 +421,7 @@ struct Node: Named
   void SetMatrix(const Dali::Matrix& m);
 };
 
-struct Animation : Named
+struct LIBDLI_API Animation : Named
 {
   struct Sampler
   {
@@ -469,12 +474,12 @@ struct Animation : Named
   std::vector<Channel> mChannels;
 };
 
-struct Scene: Named
+struct LIBDLI_API Scene: Named
 {
   std::vector<Ref<Node>> mNodes;
 };
 
-struct Document
+struct LIBDLI_API Document
 {
   Asset mAsset;
 
@@ -497,12 +502,19 @@ struct Document
 
   std::vector<Scene> mScenes;
   Ref<Scene> mScene;
+
+  Document() = default;
+  Document(const Document&) = delete;
+  Document(Document&&) = default;
+
+  Document& operator=(const Document&) = delete;
+  Document& operator=(Document&&) = default;
 };
 
 ///@brief Provides a json::Property<T>::ReadFn for interpreting unsigned integers
 /// as a Ref<U> into a std::vector<U> data member of a type T.
 template <typename T>
-struct RefReader
+struct LIBDLI_API RefReader
 {
   static T* sObject;
 
@@ -519,7 +531,7 @@ T* RefReader<T>::sObject = nullptr;
 
 ///@brief Convenience method to set the object for RefReader.
 template <typename T>
-void SetRefReaderObject(T& object)
+LIBDLI_API void SetRefReaderObject(T& object)
 {
   RefReader<T>::sObject = &object;
 }
@@ -528,7 +540,7 @@ void SetRefReaderObject(T& object)
 ///@note The enum must: 1, be called Type, nested to T, 2, provide a FromString static method taking a const char*
 /// (string data) and a size_t (string length) and returning T::Type.
 template <typename T> // T must have a nested enum called Type and a static Type FromString(const char*) method.
-typename T::Type ReadStringEnum(const json_value_s& j)
+LIBDLI_API typename T::Type ReadStringEnum(const json_value_s& j)
 {
   auto str = json::Read::StringView(j);
 
@@ -540,7 +552,7 @@ typename T::Type ReadStringEnum(const json_value_s& j)
 /// float components.
 template <typename T>
 inline
-T ReadDaliVector(const json_value_s& j)
+LIBDLI_API T ReadDaliVector(const json_value_s& j)
 {
   std::vector<float> floats = json::Read::Array<float, json::Read::Number<float>>(j);
   T result;
@@ -550,7 +562,7 @@ T ReadDaliVector(const json_value_s& j)
 
 ///@brief Convenience method to attemt to read a Dali::Quaternion, which implicitly converts
 /// to Vector4 but fails to provide an AsFloat() method.
-Dali::Quaternion ReadQuaternion(const json_value_s& j);
+LIBDLI_API Dali::Quaternion ReadQuaternion(const json_value_s& j);
 
 }
 

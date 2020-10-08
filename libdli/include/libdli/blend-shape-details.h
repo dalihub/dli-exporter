@@ -17,6 +17,9 @@
 *
 */
 
+// INTERNAL INCLUDES
+#include "libdli-api.h"
+
 // EXTERNAL INCLUDES
 #include "dali/public-api/rendering/shader.h"
 #include "dali/public-api/actors/actor.h"
@@ -27,7 +30,7 @@ namespace dli
 struct MeshDefinition;
 struct MeshGeometry;
 
-struct BlendShapes
+struct LIBDLI_API BlendShapes
 {
   enum class Version
   {

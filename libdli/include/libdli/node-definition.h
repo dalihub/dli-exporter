@@ -17,7 +17,14 @@
 *
 */
 
-// EXTERNAL
+// INTERNAL INCLUDES
+#include "lighting-mode.h"
+#include "customization.h"
+#include "matrix-stack.h"
+#include "resource-bundle.h"
+#include "text-cache-item.h"
+
+// EXTERNAL INCLUDES
 #include "dali-toolkit/devel-api/text/text-utils-devel.h"
 #include "dali/public-api/math/quaternion.h"
 #include "dali/public-api/math/matrix.h"
@@ -27,20 +34,13 @@
 #include <memory>
 #include <functional>
 
-// INTERNAL
-#include "lighting-mode.h"
-#include "customization.h"
-#include "matrix-stack.h"
-#include "resource-bundle.h"
-#include "text-cache-item.h"
-
 namespace dli
 {
 
 class ViewProjection;
 
 ///@brief Interface to report (const) resource ids to.
-class IResourceReceiver
+class LIBDLI_API IResourceReceiver
 {
 public:
   virtual ~IResourceReceiver()
@@ -52,7 +52,7 @@ public:
 ///@brief Interface to report modifiable resource ids to.
 ///@note These are supposed to be transient. Obviously, the references collected
 /// this way must not outlive the objects that they came from.
-class IResourceReflector
+class LIBDLI_API IResourceReflector
 {
 public:
   virtual ~IResourceReflector()
@@ -64,7 +64,7 @@ public:
 ///@brief Intermediate representation for a constraint that shall be
 /// set up after the Actors were created. The target of the constraint
 /// is the node definition that carries it.
-struct ConstraintDefinition
+struct LIBDLI_API ConstraintDefinition
 {
   std::string mProperty;  ///< name of the property to constrain.
   Index mSourceIdx;  ///< index of the node to serve as the source of the constraint.
@@ -85,7 +85,7 @@ struct ConstraintDefinition
   }
 };
 
-struct Transforms
+struct LIBDLI_API Transforms
 {
   MatrixStack modelStack;
   const ViewProjection& viewProjection;
@@ -93,7 +93,7 @@ struct Transforms
 
 ///@brief Information about a skeleton and the shader that needs to be configured with it.
 ///@note Multiple skeletons shalt not share the same shader.
-struct SkinningShaderConfigurationRequest
+struct LIBDLI_API SkinningShaderConfigurationRequest
 {
   Index mSkeletonIdx;
   Dali::Shader mShader;
@@ -107,7 +107,7 @@ struct SkinningShaderConfigurationRequest
 /**
  * @brief Needed to configure blend shape properties.
  */
-struct BlendshapeShaderConfigurationRequest
+struct LIBDLI_API BlendshapeShaderConfigurationRequest
 {
   std::string mNodeName;
   Index mMeshIdx;
@@ -120,14 +120,14 @@ struct BlendshapeShaderConfigurationRequest
 };
 
 ///@brief Request for creating a constraint, output from NodeDefinition::OnCreate.
-struct ConstraintRequest
+struct LIBDLI_API ConstraintRequest
 {
   const ConstraintDefinition* const mConstraint;  ///< Definition of the constraint to create.
   Dali::Actor mTarget;  ///< Target of the constraint.
 };
 
 ///@brief Information about animated images that needs to be configured with it.
-struct AnimatedImageNodeConfigurationRequest
+struct LIBDLI_API AnimatedImageNodeConfigurationRequest
 {
   Dali::Actor mActor;
   Index mMaterialIndex;
@@ -140,7 +140,7 @@ struct AnimatedImageNodeConfigurationRequest
 ///@brief Defines a node, consisting of a name, a transform, a size, a lighting mode
 /// (applied recursively), a list of child nodes, and slots for customization and
 /// rendering logic, which are mutually exclusive in the current implementation.
-struct NodeDefinition
+struct LIBDLI_API NodeDefinition
 {
 public:  // TYPES
   using Vector = std::vector<NodeDefinition>;
@@ -160,7 +160,7 @@ public:  // TYPES
     std::vector<AnimatedImageNodeConfigurationRequest> mAnimatables;
   };
 
-  class Renderable
+  class LIBDLI_API Renderable
   {
   public: // DATA
     Index mShaderIdx = INVALID_INDEX;
@@ -246,7 +246,7 @@ public: // DATA
   Index mParentIdx = INVALID_INDEX;
 };
 
-class ModelNode : public NodeDefinition::Renderable
+class LIBDLI_API ModelNode : public NodeDefinition::Renderable
 {
 public: // DATA
   Dali::Vector4 mColor = Dali::Color::WHITE;
@@ -260,7 +260,7 @@ public: // METHODS
 };
 
 ///@brief Parameters for an Arc node.
-class ArcNode : public ModelNode
+class LIBDLI_API ArcNode : public ModelNode
 {
 public: // DATA
   bool mAntiAliasing = true;
@@ -276,7 +276,7 @@ public: // METHODS
 };
 
 ///@brief Parameters for a Text Node.
-class TextNode : public NodeDefinition::Renderable
+class LIBDLI_API TextNode : public NodeDefinition::Renderable
 {
 public:
   void OnCreate(const NodeDefinition& node, NodeDefinition::CreateParams& params, Dali::Actor& actor) const override;
@@ -291,7 +291,7 @@ public: // DATA
 };
 
 ///@brief Parameters for an Animated Image Node.
-class AnimatedImageNode : public ModelNode
+class LIBDLI_API AnimatedImageNode : public ModelNode
 {
 public:  // METHODS
   void OnCreate(const NodeDefinition& node, NodeDefinition::CreateParams& params, Dali::Actor& actor) const override;

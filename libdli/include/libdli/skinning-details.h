@@ -17,6 +17,10 @@
  *
  */
 
+// INTERNAL INCLUDES
+#include "libdli-api.h"
+
+// EXTERNAL INCLUDES
 #include <string>
 
 namespace Dali
@@ -26,7 +30,7 @@ class Shader;
 
 namespace dli
 {
-struct Skinning
+struct LIBDLI_API Skinning
 {
   ///@brief Upper limit on the number of joints supported.
   static const uint32_t MAX_JOINTS;

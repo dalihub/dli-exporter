@@ -18,6 +18,7 @@
  */
 
 // INTERNAL INCLUDES
+#include "libdli-api.h"
 #include "mesh-geometry.h"
 #include "blend-shape-details.h"
 #include "utils.h"
@@ -33,7 +34,7 @@ namespace dli
 ///@brief Defines a mesh with its attributes, the primitive type to render it as,
 /// and the file to load it from with the offset and length information for the
 /// individual attribute buffers.
-struct MeshDefinition
+struct LIBDLI_API MeshDefinition
 {
   using Vector = std::vector<std::pair<MeshDefinition, MeshGeometry>>;
 

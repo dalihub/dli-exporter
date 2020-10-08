@@ -5,6 +5,3 @@ if not exist %LIBDLI_DEPLOY_DIR% (
 
 :: copy library (provide path as first argument)
 xcopy %1 %LIBDLI_DEPLOY_DIR% /Y /S
-
-:: copy headers
-xcopy "..\..\libdli\include\*" %DALI_ENV%\opt\include /Y /S

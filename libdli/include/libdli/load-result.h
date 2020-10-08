@@ -16,6 +16,9 @@
  * limitations under the License.
  *
  */
+
+// INTERNAL INCLUDES
+#include "libdli-api.h"
 #include "animation-definition.h"
 #include "light-parameters.h"
 #include "camera-parameters.h"
@@ -26,7 +29,7 @@ class ResourceBundle;
 class SceneDefinition;
 
 ///@brief The outputs from loading and processing a scene.
-struct LoadResult
+struct LIBDLI_API LoadResult
 {
   ///@brief The bundle to store resources in.
   ResourceBundle& mResources;
@@ -49,4 +52,4 @@ struct LoadResult
 
 }
 
-#endif//LIBDLI_OUTPUT_H
+#endif //LIBDLI_OUTPUT_H
