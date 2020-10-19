@@ -172,10 +172,10 @@ bool ReadAccessor(const MeshDefinition::Accessor& accessor, std::istream& source
 
 void GenerateNormals(MeshDefinition::RawData& raw)
 {
-  DALI_ASSERT_DEBUG(mAttribs.size() > 0);  // positions
+  auto& attribs = raw.mAttribs;
+  DALI_ASSERT_DEBUG(attribs.size() > 0);  // positions
   IndexProvider getIndex(raw.mIndices.data());
 
-  auto& attribs = raw.mAttribs;
   const uint32_t numIndices = raw.mIndices.empty() ? attribs[0].mNumElements : raw.mIndices.size();
 
   auto* positions = reinterpret_cast<const Vector3*>(attribs[0].mData.data());
@@ -209,10 +209,10 @@ void GenerateNormals(MeshDefinition::RawData& raw)
 
 void GenerateTangentsWithUvs(MeshDefinition::RawData& raw)
 {
-  DALI_ASSERT_DEBUG(mAttribs.size() > 2);  // positions, normals, uvs
+  auto& attribs = raw.mAttribs;
+  DALI_ASSERT_DEBUG(attribs.size() > 2);  // positions, normals, uvs
   IndexProvider getIndex(raw.mIndices.data());
 
-  auto& attribs = raw.mAttribs;
   const uint32_t numIndices = raw.mIndices.empty() ? attribs[0].mNumElements : raw.mIndices.size();
 
   auto* positions = reinterpret_cast<const Vector3*>(attribs[0].mData.data());
@@ -263,9 +263,9 @@ void GenerateTangentsWithUvs(MeshDefinition::RawData& raw)
 
 void GenerateTangents(MeshDefinition::RawData& raw)
 {
-  DALI_ASSERT_DEBUG(mAttribs.size() > 1);  // positions, normals
-
   auto& attribs = raw.mAttribs;
+  DALI_ASSERT_DEBUG(attribs.size() > 1);  // positions, normals
+
   auto* normals = reinterpret_cast<const Vector3*>(attribs[1].mData.data());
 
   std::vector<uint8_t> buffer(attribs[0].mNumElements * sizeof(Vector3));
@@ -668,7 +668,7 @@ MeshDefinition::RawData
   }
   else if (mNormals.mBlob.mLength != 0 && isTriangles)
   {
-    DALI_ASSERT_DEBUG(mNormals.mLength == mPositions.GetBufferSize());
+    DALI_ASSERT_DEBUG(mNormals.mBlob.mLength == mPositions.mBlob.GetBufferSize());
     GenerateNormals(raw);
     hasNormals = true;
   }
@@ -723,7 +723,7 @@ MeshDefinition::RawData
   }
   else if (mTangents.mBlob.mLength != 0 && hasNormals && isTriangles)
   {
-    DALI_ASSERT_DEBUG(mTangents.mLength == mNormals.GetBufferSize());
+    DALI_ASSERT_DEBUG(mTangents.mBlob.mLength == mNormals.mBlob.GetBufferSize());
     hasUvs ? GenerateTangentsWithUvs(raw) : GenerateTangents(raw);
   }
 

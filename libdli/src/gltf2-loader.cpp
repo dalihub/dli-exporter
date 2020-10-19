@@ -365,7 +365,7 @@ public:
     if (gltfIdx != runtimeIdx)
     {
       auto iInsert = std::lower_bound(mNodes.begin(), mNodes.end(), gltfIdx);
-      DALI_ASSERT_DEBUG(iInsert == cctx.mNodes.end() || iInsert->mId != gltfIdx);
+      DALI_ASSERT_DEBUG(iInsert == mNodes.end() || iInsert->gltfIdx != gltfIdx);
       mNodes.insert(iInsert, NodeMapping{ gltfIdx, runtimeIdx });
     }
   }
