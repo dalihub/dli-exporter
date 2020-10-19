@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 2.6)
-project("org.tizen.libdli" CXX)
+project("libdli" CXX)
 
 set(libdli_prj_name "dli")
+
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+  add_definitions("-DDEBUG_ENABLED")
+endif()
 
 foreach(flag ${PKGS_CFLAGS})
 	set(extra_flags "${extra_flags} ${flag}")

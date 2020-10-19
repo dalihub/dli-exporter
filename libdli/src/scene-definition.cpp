@@ -1087,8 +1087,6 @@ void SceneDefinition::ConfigureSkinningShaders(const ResourceBundle& resources,
     {
       auto node = GetNode(j.mNodeIdx);
       Actor actor = rootActor.FindChildByName(node->mName);
-
-      DALI_ASSERT_DEBUG(node->mJointData);
       ConfigureBoneMatrix(j.mInverseBindMatrix, actor, i.mShader, boneIdx);
     }
   }
