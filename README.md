@@ -1,49 +1,22 @@
-# libdli
+# dli-exporter
 
-Provides functionality for loading scenes created in the JSON-based DLI format. DLI is most similar to glTF, but less verbose / granular, and it has a few extra features:
+Converts scenes from popular 3D formats to, .dli, a JSON based format, which can
+be loaded and displayed using libdli (part of [dali-toolkit](https://github.com/dalihub/dali-toolkit )).
 
-- customizations: switch between alternative definitions of parts of the scene;
-- environment maps;
-- text, arc, and image elements;
-- etc. (TODO)
-
-There are two main modules in the package:
-
-- dli-exporter, an assimp-based conversion tool which converts Collada and glTF files to DLI, comprised of dli-exporter/core static library and dli-exporter/cli command line tool;
-- libdli: main loader functionality;
+The repository provides two artifacts: dli-exporter-core, a static library that
+performs the processing, and dli-exporter, a simple CLI implementation.
 
 ## Prequisites
 
-- Windows:
+- *either* CMake 2.6.9+ & GCC v6.3.0+
+- *or* Visual Studio 2017
+- [assimp](https://github.com/assimp/assimp) v5.0.0+
 
-  - Microsoft Visual Studio 2017 (or later, with 2017 build tools);
-  - [windows-dependencies](https://github.com/dalihub/windows-dependencies ) - please follow the steps in its README.md *as well as* its vcpkg-script/ReadMe.md, to install VCPKG and all dependencies;
- 
-- Linux:
+## Building
 
-  - GCC v9.3+;
-  - CMake v3.14+;
-  - [dali-core](https://github.com/dalihub/dali-core );
-  - [dali-adaptor](https://github.com/dalihub/dali-adaptor );
-  - [dali-toolkit](https://github.com/dalihub/dali-toolkit );
-  - configure DALi environment by following the instructions in README.md, in dali-core;
+Visual Studio 2017 and CMake projects are provided in the build/ directory. The
+latter is for Ubuntu; refer to build/cmake/build.sh for details.
 
-- All platforms:
- 
-  - [dali-demo](https://github.com/dalihub/dali-demo );
-  - [assimp](https://github.com/assimp/assimp ) - for dli-exporter;
- 
-## Build instructions
+## Usage
 
-1, build the DALi libraries and dali-demo (either using VCPKG or manually);
-
-2,
-
-  - Windows: refer to the VS2017 solution in build/windows;
-  - Linux: run the build script relating to the project you want to build, in build/tizen/;
-  - Tizen:
-
-    $ gbs build -A ${target_arch}
-
-    - for debug, add: --define "%enable_debug 1"
-    - for SMACK-enabled targets, add: --define "%enable_dali_smack_rules 1"
+$ dli-exporter path/to/input.dae [other/path/to/output[.dli]]
