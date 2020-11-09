@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns="http://tizen.org/ns/packages" package="com.samsung.libdli" version="0.1.0" api-version="2.4" install-location="internal-only">
-<!-- NOTE THAT ALL LEADING WHITESPACE IN THIS FILE MUST BE TABS, NOT SPACES. APPS WITH LEADING SPACES WILL SILENTLY FAIL TO RUN ON A TARGET DEVICE. -->
-        <label>libdlir</label>
-        <description>DLI Loading Library</description>
-</manifest>
-
