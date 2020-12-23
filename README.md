@@ -20,3 +20,7 @@ latter is for Ubuntu; refer to build/cmake/build.sh for details.
 ## Usage
 
 $ dli-exporter path/to/input.dae [other/path/to/output[.dli]]
+
+## Known issues
+
+   * Material entries need to be created (and image files used for textures moved), manually at the moment.
