@@ -24,3 +24,4 @@ $ dli-exporter path/to/input.dae [other/path/to/output[.dli]]
 ## Known issues
 
    * Material entries need to be created (and image files used for textures moved), manually at the moment.
+   * Shader entries need to be created / configured manually based on what options the mesh / material combination of the node using the shader uses.
